@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EM Auto Scroll Loader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin:0; padding:0;">
+
+<script>
+// ===== 初期スクロール設定 =====
+const INITIAL = 147;
+const MIN = 140;
+const MAX = 154;
+
+// ===== 揺らぎ間隔 =====
+function randomWait() {
+  return (300000 + Math.random() * 420000); // 5〜12分
+}
+
+// ===== 揺らぎスクロール =====
+function s() {
+  let c = window.scrollY;
+  let d = (Math.random() * 14 - 7);
+  let n = c + d;
+
+  if (n < MIN) n = MIN;
+  if (n > MAX) n = MAX;
+
+  window.scrollTo({ top: n, behavior: 'smooth' });
+  setTimeout(s, randomWait());
+}
+
+// ===== ページ読み込み時の処理 =====
+window.onload = function() {
+
+  // 初期位置へ移動
+  window.scrollTo(0, INITIAL);
+
+  // 揺らぎ開始
+  setTimeout(s, randomWait());
+
+  // ゲームURLへ遷移（ここを玄さんのURLに変更）
+  setTimeout(() => {
+    location.href = "https://eternalmonsters.com/story.html";
+  }, 200);
+};
+</script>
+
+</body>
+</html>
